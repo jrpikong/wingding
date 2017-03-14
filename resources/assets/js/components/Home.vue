@@ -28,7 +28,7 @@
         },
         mounted() {
             this.loading =true;
-            axios.get('api/user',{headers : getHeader()}).then((response) => {this.users = response.data.data;this.loading=false});
+            axios.get('api/get-all-user',{headers : getHeader()}).then((response) => {this.users = response.data.data;this.loading=false});
         }
     }
 </script>

@@ -14472,7 +14472,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         this.loading = true;
-        axios.get('api/user', { headers: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__env__["c" /* getHeader */])() }).then(function (response) {
+        axios.get('api/get-all-user', { headers: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__env__["c" /* getHeader */])() }).then(function (response) {
             _this.users = response.data.data;_this.loading = false;
         });
     }
@@ -14485,6 +14485,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__env__ = __webpack_require__(62);
+//
 //
 //
 //
@@ -14553,6 +14554,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         login: function login() {
+            var _this = this;
+
             var postData = {
                 client_id: __WEBPACK_IMPORTED_MODULE_0__env__["a" /* clientId */],
                 client_secret: __WEBPACK_IMPORTED_MODULE_0__env__["b" /* clientSecret */],
@@ -14564,12 +14567,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var authUser = {};
             // Submit the form via a POST request
             axios.post('oauth/token', postData).then(function (response) {
-                console.log(response);
                 if (response.status === 200) {
                     authUser.access_token = response.data.access_token;
                     authUser.refresh_token = response.data.refresh_token;
                     window.localStorage.setItem('authUser', JSON.stringify(authUser));
-                    $route.push('/');
+                    axios.get('api/user', { headers: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__env__["c" /* getHeader */])() }).then(function (response) {
+                        authUser.userEmail = response.data.email;
+                        authUser.userName = response.data.name;
+                        window.localStorage.setItem('authUser', JSON.stringify(authUser));
+                    });
+                    _this.$router.push({ name: 'home' });
                 }
             });
         }
@@ -14802,6 +14809,7 @@ window.axios.defaults.headers.common = {
 
 var routes = [{
     path: '/',
+    name: 'home',
     component: __webpack_require__(42)
 }, {
     path: '/login',
@@ -20516,6 +20524,8 @@ module.exports = Component.exports
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('div', {
+    staticClass: "container"
+  }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-md-8 col-md-offset-2"
@@ -20541,10 +20551,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'has-error': _vm.errors.has('email'), 'form-group': true
     }
   }, [_c('label', {
-    staticClass: "col-md-4 control-label",
-    attrs: {
-      "for": "email"
-    }
+    staticClass: "col-md-4 control-label"
   }, [_vm._v("E-Mail Address")]), _vm._v(" "), _c('div', {
     staticClass: "col-md-6"
   }, [_c('input', {
@@ -20581,10 +20588,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       'has-error': _vm.errors.has('password'), 'form-group': true
     }
   }, [_c('label', {
-    staticClass: "col-md-4 control-label",
-    attrs: {
-      "for": "Password"
-    }
+    staticClass: "col-md-4 control-label"
   }, [_vm._v("Password")]), _vm._v(" "), _c('div', {
     staticClass: "col-md-6"
   }, [_c('input', {
@@ -20654,7 +20658,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }
-  }), _vm._v(" Remember Me\n                                    ")])])])]), _vm._v(" "), _vm._m(0)])])])])])])
+  }), _vm._v(" Remember Me\n                                        ")])])])]), _vm._v(" "), _vm._m(0)])])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-group"
@@ -20665,12 +20669,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "submit"
     }
-  }, [_vm._v("\n                                    Login\n                                ")]), _vm._v(" "), _c('a', {
+  }, [_vm._v("\n                                        Login\n                                    ")]), _vm._v(" "), _c('a', {
     staticClass: "btn btn-link",
     attrs: {
       "href": ""
     }
-  }, [_vm._v("\n                                    Forgot Your Password?\n                                ")])])])
+  }, [_vm._v("\n                                        Forgot Your Password?\n                                    ")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
