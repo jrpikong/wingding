@@ -16,7 +16,7 @@
                             </div>
                         </div>
                             <div :class="{ 'has-error': errors.has('password'), 'form-group': true } ">
-                                <label for="password" class="col-md-4 control-label">Password</label>
+                                <label for="Password" class="col-md-4 control-label">Password</label>
                                 <div class="col-md-6">
                                     <input v-validate data-vv-rules="required|min:8" v-model="form.password"  type="password" class="form-control" name="password"  required autofocus>
                                     <span v-if="errors.has('password')" class="help-block">
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+    import {clientId,clientSecret,getHeader} from '../env'
     export default{
         data(){
             return{
@@ -64,18 +65,25 @@
         },
         methods: {
             login () {
-                var data = {
-                    client_id:2,
-                    client_secret:'bY25f29v6B1WMWzIys9rteLt7IlI1CN1Tn26Rqlh',
+                var postData = {
+                    client_id:clientId,
+                    client_secret:clientSecret,
                     grant_type: 'password',
                     username: this.form.email,
-                    password:this.form.password
+                    password:this.form.password,
+                    scope:''
                 }
+                const authUser ={}
                 // Submit the form via a POST request
-                axios.post('api/auth/login', data)
+                axios.post('oauth/token', postData)
                         .then(response => {
-                            this.$auth.setToken(response.body.access_token, response.body.expires_in + Date.now())
-                            this.$router.push({name:'home'})
+                            console.log(response);
+                            if(response.status === 200){
+                                authUser.access_token = response.data.access_token
+                                authUser.refresh_token = response.data.refresh_token
+                                window.localStorage.setItem('authUser', JSON.stringify(authUser))
+                                $route.push('/')
+                            }
                         })
             }
         }

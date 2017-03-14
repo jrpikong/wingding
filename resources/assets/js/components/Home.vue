@@ -11,8 +11,7 @@
 </template>
 
 <script>
-//    var PulseLoader = VueSpinner.PulseLoader
-//var PulseLoader = VueStrap.PulseLoader;
+    import {getHeader} from '../env'
     export default{
         data(){
             return{
@@ -29,7 +28,7 @@
         },
         mounted() {
             this.loading =true;
-            axios.get('api/user').then((response) => {this.users = response.data.data;this.loading=false});
+            axios.get('api/user',{headers : getHeader()}).then((response) => {this.users = response.data.data;this.loading=false});
         }
     }
 </script>

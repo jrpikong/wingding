@@ -14439,6 +14439,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__env__ = __webpack_require__(62);
 //
 //
 //
@@ -14452,8 +14453,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-//    var PulseLoader = VueSpinner.PulseLoader
-//var PulseLoader = VueStrap.PulseLoader;
+
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function data() {
         return {
@@ -14472,7 +14472,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         this.loading = true;
-        axios.get('api/user').then(function (response) {
+        axios.get('api/user', { headers: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__env__["c" /* getHeader */])() }).then(function (response) {
             _this.users = response.data.data;_this.loading = false;
         });
     }
@@ -14484,6 +14484,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__env__ = __webpack_require__(62);
 //
 //
 //
@@ -14537,6 +14538,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = {
     data: function data() {
@@ -14551,19 +14553,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         login: function login() {
-            var _this = this;
-
-            var data = {
-                client_id: 2,
-                client_secret: 'bY25f29v6B1WMWzIys9rteLt7IlI1CN1Tn26Rqlh',
+            var postData = {
+                client_id: __WEBPACK_IMPORTED_MODULE_0__env__["a" /* clientId */],
+                client_secret: __WEBPACK_IMPORTED_MODULE_0__env__["b" /* clientSecret */],
                 grant_type: 'password',
                 username: this.form.email,
-                password: this.form.password
+                password: this.form.password,
+                scope: ''
             };
+            var authUser = {};
             // Submit the form via a POST request
-            axios.post('api/auth/login', data).then(function (response) {
-                _this.$auth.setToken(response.body.access_token, response.body.expires_in + Date.now());
-                _this.$router.push({ name: 'home' });
+            axios.post('oauth/token', postData).then(function (response) {
+                console.log(response);
+                if (response.status === 200) {
+                    authUser.access_token = response.data.access_token;
+                    authUser.refresh_token = response.data.refresh_token;
+                    window.localStorage.setItem('authUser', JSON.stringify(authUser));
+                    $route.push('/');
+                }
             });
         }
     }
@@ -20576,7 +20583,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('label', {
     staticClass: "col-md-4 control-label",
     attrs: {
-      "for": "password"
+      "for": "Password"
     }
   }, [_vm._v("Password")]), _vm._v(" "), _c('div', {
     staticClass: "col-md-6"
@@ -30491,6 +30498,37 @@ module.exports = g;
 __webpack_require__(11);
 module.exports = __webpack_require__(12);
 
+
+/***/ }),
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return clientId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return clientSecret; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getHeader; });
+/**
+ * Created by jrpikong on 14/03/17.
+ */
+var clientId = '2';
+var clientSecret = 'jDFmLYsT5pEUxSaErG48uDNzHDdq0tVZQkoGwYcj';
+
+var getHeader = function getHeader() {
+    var tokenData = JSON.parse(window.localStorage.getItem('authUser'));
+    var headers = {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer ' + tokenData.access_token
+    };
+
+    return headers;
+};
 
 /***/ })
 /******/ ]);
