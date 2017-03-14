@@ -29,6 +29,9 @@ Vue.use(VueRouter)
 import VeeValidate from 'vee-validate';
 Vue.use(VeeValidate);
 
+import PulseLoader from 'vue-spinner/src/PulseLoader'
+Vue.use(PulseLoader);
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the

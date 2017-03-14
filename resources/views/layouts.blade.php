@@ -21,7 +21,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Bootstrap -->
 
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -34,13 +34,13 @@
     <div id="app">
         @include('partial.nav')
 
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <router-view></router-view>
             </div>
         </div>
     </div>
 
-<script src="/js/app.js" charset="utf-8"></script>
+<script src="{{ mix('js/app.js') }}" charset="utf-8"></script>
 </body>
 </html>
