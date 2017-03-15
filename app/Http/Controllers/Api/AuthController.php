@@ -65,7 +65,6 @@ class AuthController extends Controller
      */
     public function show(User $user)
     {
-//        return $user;
         //
         $user = $user->all();
         return fractal()

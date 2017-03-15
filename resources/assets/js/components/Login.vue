@@ -82,13 +82,21 @@
                             authUser.access_token = response.data.access_token
                             authUser.refresh_token = response.data.refresh_token
                             window.localStorage.setItem('authUser', JSON.stringify(authUser))
+                            console.log(response.data)
                             axios.get('api/user',{headers:getHeader()})
                                 .then(response =>{
                                     authUser.userEmail = response.data.email
                                     authUser.userName  = response.data.name
                                     window.localStorage.setItem('authUser', JSON.stringify(authUser))
+
+                                    if(response.data.role_id === 2)
+                                    {
+                                        this.$router.push({name:'dashboard'})
+                                    }else{
+                                        this.$router.push({name:'home'})
+                                    }
                                 })
-                            this.$router.push({name:'home'})
+
                         }
                     })
             }

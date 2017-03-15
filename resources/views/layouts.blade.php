@@ -22,6 +22,10 @@
     <!-- Bootstrap -->
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+    <!-- Global stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link href="./css/css/components.css" rel="stylesheet" type="text/css">
+
 
     <!-- Scripts -->
     <script>
@@ -41,6 +45,8 @@
         </div>
     </div>
 
-<script src="{{ mix('js/app.js') }}" charset="utf-8"></script>
+    <script src="{{ mix('js/app.js') }}" charset="utf-8"></script>
+    <!-- Core JS files -->
+    <script type="text/javascript" src="js/js/plugins/loaders/pace.min.js"></script>
 </body>
 </html>

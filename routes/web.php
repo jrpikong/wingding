@@ -22,3 +22,7 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('user/login',function (){
    return view('auth/login');
 });
+
+Route::get('/{vue_capture?}', function () {
+    return view('layouts');
+})->where('vue_capture', '[\/\w\.-]*');
