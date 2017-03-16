@@ -35,6 +35,7 @@
                         <!-- Authentication Links -->
                         <router-link to="/login" tag="li"><a>Login</a></router-link>
                         <router-link to="/register" tag="li"><a>Register</a></router-link>
+                        <router-link to="/vendor/profile" tag="li"><a>Profile</a></router-link>
                     </ul>
                 </div>
             </div>

@@ -13523,13 +13523,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __webpack_require__(37);
 
-var app = new Vue({
-    el: '#app',
-    router: __WEBPACK_IMPORTED_MODULE_0__routes_js__["a" /* default */]
-});
-
 __WEBPACK_IMPORTED_MODULE_0__routes_js__["a" /* default */].beforeEach(function (to, from, next) {
-    if (to.meta.requiresAuth) {
+    if (to.matched.some(function (record) {
+        return record.meta.requiresAuth;
+    })) {
+
         var authUser = JSON.parse(window.localStorage.getItem('authUser'));
         if (authUser && authUser.access_token) {
             next();
@@ -13541,6 +13539,11 @@ __WEBPACK_IMPORTED_MODULE_0__routes_js__["a" /* default */].beforeEach(function 
         }
     }
     next();
+});
+
+var app = new Vue({
+    el: '#app',
+    router: __WEBPACK_IMPORTED_MODULE_0__routes_js__["a" /* default */]
 });
 
 /***/ }),
@@ -14615,7 +14618,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     authUser.access_token = response.data.access_token;
                     authUser.refresh_token = response.data.refresh_token;
                     window.localStorage.setItem('authUser', JSON.stringify(authUser));
-                    console.log(response.data);
+                    //                            console.log(response.data)
                     axios.get('api/user', { headers: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__env__["c" /* getHeader */])() }).then(function (response) {
                         authUser.userEmail = response.data.email;
                         authUser.userName = response.data.name;
@@ -20459,7 +20462,7 @@ var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(32),
   /* template */
-  __webpack_require__(51),
+  __webpack_require__(52),
   /* scopeId */
   null,
   /* cssModules */
@@ -20493,15 +20496,15 @@ var Component = __webpack_require__(1)(
   /* script */
   __webpack_require__(33),
   /* template */
-  __webpack_require__(52),
+  __webpack_require__(51),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "/var/www/html/wingding/resources/assets/js/components/DasboardVendor.vue"
+Component.options.__file = "/var/www/html/wingding/resources/assets/js/components/DashboardVendor.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] DasboardVendor.vue: functional components are not supported with templates, they should use render functions.")}
+if (Component.options.functional) {console.error("[vue-loader] DashboardVendor.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
@@ -20510,9 +20513,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6dd30915", Component.options)
+    hotAPI.createRecord("data-v-5a2bfe2f", Component.options)
   } else {
-    hotAPI.reload("data-v-6dd30915", Component.options)
+    hotAPI.reload("data-v-5a2bfe2f", Component.options)
   }
 })()}
 
@@ -21055,6 +21058,27 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', [_c('div', {
+    staticClass: "container"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_vm._v("\n            Haloo dhas\n        ")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5a2bfe2f", module.exports)
+  }
+}
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     directives: [{
       name: "show",
@@ -21079,27 +21103,6 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-639e5d67", module.exports)
-  }
-}
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {
-    staticClass: "container"
-  }, [_c('div', {
-    staticClass: "row"
-  }, [_vm._v("\n            Haloo dhas\n        ")])])])
-}]}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-6dd30915", module.exports)
   }
 }
 

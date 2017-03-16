@@ -82,7 +82,7 @@
                             authUser.access_token = response.data.access_token
                             authUser.refresh_token = response.data.refresh_token
                             window.localStorage.setItem('authUser', JSON.stringify(authUser))
-                            console.log(response.data)
+//                            console.log(response.data)
                             axios.get('api/user',{headers:getHeader()})
                                 .then(response =>{
                                     authUser.userEmail = response.data.email

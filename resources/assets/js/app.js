@@ -1,14 +1,9 @@
 import router from './routes.js';
 require('./bootstrap');
 
-const app = new Vue({
-    el: '#app',
-    router,
-});
-
-
 router.beforeEach((to,from,next) => {
-    if(to.meta.requiresAuth){
+    if(to.matched.some(record => record.meta.requiresAuth)){
+
         const authUser = JSON.parse(window.localStorage.getItem('authUser'))
         if(authUser && authUser.access_token){
             next()
@@ -21,4 +16,11 @@ router.beforeEach((to,from,next) => {
     }
     next()
 })
+
+const app = new Vue({
+    el: '#app',
+    router,
+});
+
+
 

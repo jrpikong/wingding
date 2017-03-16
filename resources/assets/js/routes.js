@@ -22,7 +22,7 @@ let routes =[
         path:'/vendor/dashboard',
         name:'dashboard',
         meta:{requiresAuth: true},
-        component : require('./components/DasboardVendor')
+        component : require('./components/DashboardVendor')
     },
     {
         path:'/vendor/profile',
