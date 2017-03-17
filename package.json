@@ -16,6 +16,7 @@
     "vue-router": "^2.3.0"
   },
   "dependencies": {
-    "vee-validate": "^2.0.0-beta.17"
+    "vee-validate": "^2.0.0-beta.17",
+    "vuex": "^2.2.1"
   }
 }

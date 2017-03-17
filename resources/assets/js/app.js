@@ -1,4 +1,5 @@
 import router from './routes.js';
+import store from './store.js'
 require('./bootstrap');
 
 router.beforeEach((to,from,next) => {
@@ -16,11 +17,8 @@ router.beforeEach((to,from,next) => {
     }
     next()
 })
-
+Vue.component('top-menu',require('./components/topMenu.vue'))
 const app = new Vue({
     el: '#app',
-    router,
+    router,store
 });
-
-
-

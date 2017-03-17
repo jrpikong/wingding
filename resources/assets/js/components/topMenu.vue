@@ -1,11 +1,20 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jrpikong
- * Date: 11/03/17
- * Time: 17:46
- */
-?>
+<script>
+    import {mapState} from 'vuex'
+    export default {
+        computed: {
+            mapState(){
+                userStore: state => state.userStore
+            }
+        },
+        created() {
+            const userObj = JSON.parse(window.localStorage.getItem('authUser'))
+            this.$store.dispatch('setUserObject',userObj)
+        }
+    }
+</script>
+<template>
+    <div>
+        <!--<pre>{{ userStore }}</pre>-->
         <nav class="navbar navbar-default navbar-static-top" >
             <div class="container">
                 <div class="navbar-header">
@@ -31,7 +40,8 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <!--<ul class="nav navbar-nav navbar-right" v-if="userStore.authUser !== null && userStore.authUser.access_token">-->
+                    <ul class="nav navbar-nav navbar-right" v-if="userStore && userStore.authUser && userStore.authUser.access_token">
                         <!-- Authentication Links -->
                         <router-link to="/login" tag="li"><a>Login</a></router-link>
                         <router-link to="/register" tag="li"><a>Register</a></router-link>
@@ -40,3 +50,5 @@
                 </div>
             </div>
         </nav>
+    </div>
+</template>

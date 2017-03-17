@@ -31,6 +31,7 @@ Vue.use(VeeValidate);
 
 import PulseLoader from 'vue-spinner/src/PulseLoader'
 Vue.use(PulseLoader);
+import store from './store'
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

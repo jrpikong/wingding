@@ -36,8 +36,7 @@
 </head>
 <body>
     <div id="app">
-        @include('partial.nav')
-
+        <top-menu></top-menu>
         <div class="container-fluid">
             <div class="row">
                 <router-view></router-view>
